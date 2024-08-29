@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>WFWorkflowActions</key>
+    <array>
+      <dict>
+        <key>WFWorkflowActionIdentifier</key>
+        <string>is.workflow.actions.ask</string>
+        <key>WFWorkflowActionParameters</key>
+        <dict>
+          <key>WFAskActionPrompt</key>
+          <string>Enter the first number</string>
+          <key>WFInputType</key>
+          <string>Number</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>WFWorkflowActionIdentifier</key>
+        <string>is.workflow.actions.ask</string>
+        <key>WFWorkflowActionParameters</key>
+        <dict>
+          <key>WFAskActionPrompt</key>
+          <string>Enter the second number</string>
+          <key>WFInputType</key>
+          <string>Number</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>WFWorkflowActionIdentifier</key>
+        <string>is.workflow.actions.math</string>
+        <key>WFWorkflowActionParameters</key>
+        <dict>
+          <key>WFMathOperation</key>
+          <string>Add</string>
+          <key>WFMathOperand</key>
+          <dict>
+            <key>Value</key>
+            <dict>
+              <key>Type</key>
+              <string>Variable</string>
+              <key>VariableName</key>
+              <string>Ask for Input</string>
+            </dict>
+          </dict>
+        </dict>
+      </dict>
+      <dict>
+        <key>WFWorkflowActionIdentifier</key>
+        <string>is.workflow.actions.showresult</string>
+        <key>WFWorkflowActionParameters</key>
+        <dict>
+          <key>Text</key>
+          <dict>
+            <key>Value</key>
+            <dict>
+              <key>String</key>
+              <string>Hello World! The sum is {{Calculation Result}}</string>
+            </dict>
+          </dict>
+        </dict>
+      </dict>
+    </array>
+    <key>WFWorkflowClientVersion</key>
+    <string>754</string>
+    <key>WFWorkflowClientRelease</key>
+    <string>2.1.2</string>
+    <key>WFWorkflowMinimumClientVersion</key>
+    <integer>411</integer>
+    <key>WFWorkflowIcon</key>
+    <dict>
+      <key>WFWorkflowIconGlyphNumber</key>
+      <integer>59511</integer>
+      <key>WFWorkflowIconImageData</key>
+      <string/>
+      <key>WFWorkflowIconStartColor</key>
+      <integer>2071128575</integer>
+    </dict>
+    <key>WFWorkflowTypes</key>
+    <array>
+      <string>NCWidget</string>
+      <string>WatchKit</string>
+    </array>
+    <key>WFWorkflowInputContentItemClasses</key>
+    <array>
+      <string>WFAppStoreAppContentItem</string>
+      <string>WFArticleContentItem</string>
+      <string>WFContactContentItem</string>
+      <string>WFDateContentItem</string>
+      <string>WFEmailAddressContentItem</string>
+      <string>WFGenericFileContentItem</string>
+      <string>WFImageContentItem</string>
+      <string>WFiTunesProductContentItem</string>
+      <string>WFLocationContentItem</string>
+      <string>WFDCMapsLinkContentItem</string>
+      <string>WFAVAssetContentItem</string>
+      <string>WFPDFContentItem</string>
+      <string>WFPhoneNumberContentItem</string>
+      <string>WFRichTextContentItem</string>
+      <string>WFSafariWebPageContentItem</string>
+      <string>WFStringContentItem</string>
+      <string>WFURLContentItem</string>
+    </array>
+  </dict>
+</plist>
