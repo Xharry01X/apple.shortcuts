@@ -17,6 +17,15 @@
       </dict>
       <dict>
         <key>WFWorkflowActionIdentifier</key>
+        <string>is.workflow.actions.setvariable</string>
+        <key>WFWorkflowActionParameters</key>
+        <dict>
+          <key>WFVariableName</key>
+          <string>SSID</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>WFWorkflowActionIdentifier</key>
         <string>is.workflow.actions.ask</string>
         <key>WFWorkflowActionParameters</key>
         <dict>
@@ -28,6 +37,15 @@
       </dict>
       <dict>
         <key>WFWorkflowActionIdentifier</key>
+        <string>is.workflow.actions.setvariable</string>
+        <key>WFWorkflowActionParameters</key>
+        <dict>
+          <key>WFVariableName</key>
+          <string>Password</string>
+        </dict>
+      </dict>
+      <dict>
+        <key>WFWorkflowActionIdentifier</key>
         <string>is.workflow.actions.text</string>
         <key>WFWorkflowActionParameters</key>
         <dict>
@@ -35,8 +53,25 @@
           <dict>
             <key>Value</key>
             <dict>
-              <key>String</key>
-              <string>WIFI:S:{{Ask for Input}};;T:WPA;P:{{Ask for Input 2}};;</string>
+              <key>attachmentsByRange</key>
+              <dict>
+                <key>{7, 1}</key>
+                <dict>
+                  <key>Type</key>
+                  <string>Variable</string>
+                  <key>VariableName</key>
+                  <string>SSID</string>
+                </dict>
+                <key>{18, 1}</key>
+                <dict>
+                  <key>Type</key>
+                  <string>Variable</string>
+                  <key>VariableName</key>
+                  <string>Password</string>
+                </dict>
+              </dict>
+              <key>string</key>
+              <string>WIFI:S:📍;T:WPA;P:📍;;</string>
             </dict>
           </dict>
         </dict>

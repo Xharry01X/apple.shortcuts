@@ -13,6 +13,12 @@ function createShortcut() {
                 }
             },
             {
+                WFWorkflowActionIdentifier: 'is.workflow.actions.setvariable',
+                WFWorkflowActionParameters: {
+                    WFVariableName: 'SSID'
+                }
+            },
+            {
                 WFWorkflowActionIdentifier: 'is.workflow.actions.ask',
                 WFWorkflowActionParameters: {
                     WFAskActionPrompt: 'Enter WiFi password',
@@ -20,11 +26,27 @@ function createShortcut() {
                 }
             },
             {
+                WFWorkflowActionIdentifier: 'is.workflow.actions.setvariable',
+                WFWorkflowActionParameters: {
+                    WFVariableName: 'Password'
+                }
+            },
+            {
                 WFWorkflowActionIdentifier: 'is.workflow.actions.text',
                 WFWorkflowActionParameters: {
                     Text: {
                         Value: {
-                            String: 'WIFI:S:{{Ask for Input}};;T:WPA;P:{{Ask for Input 2}};;'
+                            attachmentsByRange: {
+                                '{7, 1}': {
+                                    Type: 'Variable',
+                                    VariableName: 'SSID'
+                                },
+                                '{18, 1}': {
+                                    Type: 'Variable',
+                                    VariableName: 'Password'
+                                }
+                            },
+                            string: 'WIFI:S:📍;T:WPA;P:📍;;'
                         }
                     }
                 }
