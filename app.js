@@ -1,88 +1,61 @@
 const fs = require('fs');
 const plist = require('plist');
+const bplist = require('bplist-creator');
 
 function createShortcut() {
-  return {
-    WFWorkflowActions: [
-      {
-        WFWorkflowActionIdentifier: 'is.workflow.actions.ask',
-        WFWorkflowActionParameters: {
-          WFAskActionPrompt: 'Enter the first number',
-          WFInputType: 'Number'
-        }
-      },
-      {
-        WFWorkflowActionIdentifier: 'is.workflow.actions.ask',
-        WFWorkflowActionParameters: {
-          WFAskActionPrompt: 'Enter the second number',
-          WFInputType: 'Number'
-        }
-      },
-      {
-        WFWorkflowActionIdentifier: 'is.workflow.actions.math',
-        WFWorkflowActionParameters: {
-          WFMathOperation: 'Add',
-          WFMathOperand: {
-            Value: {
-              Type: 'Variable',
-              VariableName: 'Ask for Input'
+    return {
+        WFWorkflowActions: [
+            {
+                WFWorkflowActionIdentifier: 'is.workflow.actions.ask',
+                WFWorkflowActionParameters: {
+                    WFAskActionPrompt: { Value: { String: 'Enter WiFi network name (SSID)' } },
+                    WFInputType: { Value: 'Text' }
+                }
+            },
+            {
+                WFWorkflowActionIdentifier: 'is.workflow.actions.ask',
+                WFWorkflowActionParameters: {
+                    WFAskActionPrompt: { Value: { String: 'Enter WiFi password' } },
+                    WFInputType: { Value: 'Text' }
+                }
+            },
+            {
+                WFWorkflowActionIdentifier: 'is.workflow.actions.text',
+                WFWorkflowActionParameters: {
+                    Text: { Value: { String: 'WIFI:S:{{Ask for Input}};;T:WPA;P:{{Ask for Input 2}};;' } }
+                }
+            },
+            {
+                WFWorkflowActionIdentifier: 'is.workflow.actions.generateqrcode',
+                WFWorkflowActionParameters: {
+                    WFInputText: { Value: { Type: 'Variable', VariableName: 'Text' } }
+                }
+            },
+            {
+                WFWorkflowActionIdentifier: 'is.workflow.actions.showresult',
+                WFWorkflowActionParameters: {
+                    Text: { Value: { Type: 'Variable', VariableName: 'QR Code' } }
+                }
             }
-          }
-        }
-      },
-      {
-        WFWorkflowActionIdentifier: 'is.workflow.actions.showresult',
-        WFWorkflowActionParameters: {
-          Text: {
-            Value: {
-              String: 'Hello World! The sum is {{Calculation Result}}'
-            }
-          }
-        }
-      }
-    ],
-    WFWorkflowClientVersion: '754',
-    WFWorkflowClientRelease: '2.1.2',
-    WFWorkflowMinimumClientVersion: 411,
-    WFWorkflowIcon: {
-      WFWorkflowIconGlyphNumber: 59511,
-      WFWorkflowIconImageData: '',
-      WFWorkflowIconStartColor: 2071128575
-    },
-    WFWorkflowTypes: ['NCWidget', 'WatchKit'],
-    WFWorkflowInputContentItemClasses: [
-      'WFAppStoreAppContentItem',
-      'WFArticleContentItem',
-      'WFContactContentItem',
-      'WFDateContentItem',
-      'WFEmailAddressContentItem',
-      'WFGenericFileContentItem',
-      'WFImageContentItem',
-      'WFiTunesProductContentItem',
-      'WFLocationContentItem',
-      'WFDCMapsLinkContentItem',
-      'WFAVAssetContentItem',
-      'WFPDFContentItem',
-      'WFPhoneNumberContentItem',
-      'WFRichTextContentItem',
-      'WFSafariWebPageContentItem',
-      'WFStringContentItem',
-      'WFURLContentItem'
-    ]
-  };
+        ],
+        WFWorkflowClientVersion: '1050',
+        WFWorkflowClientRelease: '2.1.2',
+        WFWorkflowIcon: {
+            WFWorkflowIconStartColor: 4282601983,
+            WFWorkflowIconGlyphNumber: 59511
+        },
+        WFWorkflowImportQuestions: [],
+        WFWorkflowTypes: ['ncwidget', 'watch', 'quicklook'],
+        WFWorkflowActions: []
+    };
 }
 
 function generateShortcut() {
-  const shortcut = createShortcut();
-  const plistData = plist.build(shortcut);
-  
-  // Add XML declaration and DOCTYPE
-  const xmlDeclaration = '<?xml version="1.0" encoding="UTF-8"?>';
-  const doctype = '<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">';
-  const fullPlistData = `${xmlDeclaration}\n${doctype}\n${plistData}`;
-  
-  fs.writeFileSync('HelloWorldAddition.shortcut', fullPlistData, 'utf8');
-  console.log('Shortcut file "HelloWorldAddition.shortcut" has been created.');
+    const shortcut = createShortcut();
+    const plistData = plist.build(shortcut);
+    const bplistData = bplist(plistData);
+    fs.writeFileSync('WiFiQRShortcut.shortcut', bplistData);
+    console.log('Shortcut file "WiFiQRShortcut.shortcut" has been created.');
 }
 
 generateShortcut();
